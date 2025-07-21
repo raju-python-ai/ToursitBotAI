@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourism Chatbot</title>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../static/css/about.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar fixed-top " style="position: sticky; top:0; z-index: 10;">
+        <h2>Tourism Chatbot</h2>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+       
+        <div class="slider-container">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider">
+                <img src="../static/img/tour6.png" class="slide active" alt="Slide 1">
+                <img src="../static/img/tour2.png" class="slide" alt="Slide 2">
+                <img src="../static/img/tour3.png" class="slide" alt="Slide 3">
+                <img src="../static/img/tour4.png" class="slide" alt="Slide 4">
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+            <div class="dots-container">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+                <span class="dot" onclick="goToSlide(3)"></span>
+            </div>
+        </div>
+        <br>
+        <br>
+        
+        <div class="row">
+            <div class="doc">
+                <img src="../static/img/about.png" alt="">
+            </div>
+            <div class="aboutMe">
+                <h3>Explore the World with Tourism ChatBot: Your Ultimate Travel Guide</h3>
+
+                <p>Traveling opens the door to new experiences, cultures, and unforgettable adventures. Whether you seek stunning landscapes, historical landmarks, or vibrant cityscapes, the world offers countless destinations to explore. From the bustling streets of Bangkok and Kuala Lumpur to the futuristic skyline of Singapore, each place has its unique charm and attractions.
+    
+                Visit the magnificent Grand Palace in Thailand, experience the cultural richness of Malaysia’s Batu Caves, or marvel at Singapore’s Gardens by the Bay. Savor local delicacies like Thai street food, Malaysian Nasi Lemak, and Singaporean Hainanese Chicken Rice. Whether you're looking for serene beaches, adventurous treks, or world-class shopping destinations, MChatBot is here to provide recommendations, travel tips, and essential information to make your journey seamless and memorable.</p>
+                <br>
+                
+            </div>
+            
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+         let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            // Hide all slides and remove active class from dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Show the current slide and activate corresponding dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            // Move the slider
+            const slider = document.querySelector(".slider");
+            slider.style.transform = `translateX(-${index * 25}%)`;
+        }
+
+        function moveSlide(step) {
+            // Clear the existing interval
+            clearInterval(slideInterval);
+
+            // Calculate the new index
+            currentSlide += step;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+
+            // Show the new slide
+            showSlide(currentSlide);
+
+            // Restart the interval
+            startSlideShow();
+        }
+
+        function goToSlide(index) {
+            // Clear the existing interval
+            clearInterval(slideInterval);
+
+            currentSlide = index;
+            showSlide(currentSlide);
+
+            // Restart the interval
+            startSlideShow();
+        }
+
+        function startSlideShow() {
+            // Clear any existing interval first
+            clearInterval(slideInterval);
+
+            // Start a new interval
+            slideInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 30000); // 30 seconds
+        }
+
+        // Start the slideshow when the page loads
+        startSlideShow();
+    </script>
+    
+</body>
+</html>
